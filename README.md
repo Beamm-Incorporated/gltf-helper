@@ -42,9 +42,9 @@ docker run -t \
 #### Help 
 
 ```
-	docker run -t \
-		-v $$(pwd)/samples:/samples \
-		gltf-helper --help
+docker run -t \
+    -v $$(pwd)/samples:/samples \
+    gltf-helper --help
 ```
 
 TIP: Checkout `makefile` for other useful commands
