@@ -54,9 +54,9 @@ TIP: Checkout `makefile` for other useful commands
 ### **Red Pill Usage**
 #
 
- 1) build basisu -> [check it]("https://github.com/BinomialLLC/basis_universal#command-line-compression-tool")
+ 1) build basisu -> [check it](https://github.com/BinomialLLC/basis_universal#command-line-compression-tool)
 
- 2) install gltf-pipeline -> [check it]("https://github.com/CesiumGS/gltf-pipeline#getting-started")
+ 2) install gltf-pipeline -> [check it](https://github.com/CesiumGS/gltf-pipeline#getting-started)
 
  ```
  pip install --user gltf-helper
