@@ -1,4 +1,6 @@
-SHELL := /bin/bash # Use bash syntax
+SHELL := /bin/bash 
+
+# Docker
 
 build:
 	docker build . -t gltf-helper
@@ -27,3 +29,23 @@ help:
 	docker run -t \
 		-v $$(pwd)/samples:/samples \
 		gltf-helper --help
+
+# Poetry
+
+poetry-venv-install:
+	poetry install
+
+poetry-shell:
+	poetry shell
+
+poetry-build:
+	poetry build
+
+poetry-install:
+	pip install --user $${WHEEL}
+
+poetry-publish:
+	poetry publish --build
+
+poetry-docs:
+	typer gltf_helper/main.py utils docs --output CLI_README.md --name gltf-helper

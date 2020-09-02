@@ -19,17 +19,17 @@ RUN apt-get update \
 RUN curl -sL https://deb.nodesource.com/setup_10.x | bash \
     && apt-get install -y nodejs
     
-RUN npm install -g gltf-pipeline
+RUN npm install -g gltf-pipeline 
 
-WORKDIR /usr/bin
+COPY --from=builder /basis_universal/bin/basisu /usr/bin
 
-COPY --from=builder /basis_universal/bin/basisu .
+COPY gltf_helper /gltf_helper
 
-COPY lib /lib
-
-COPY requirements.txt /requirements.txt
-
-RUN pip3 install --no-cache-dir -r /requirements.txt \
+RUN pip3 install --no-cache-dir poetry \
     && rm -rf /root/.cache
+
+COPY pyproject.toml /pyproject.toml
+
+RUN poetry config http-basic.mypypi hekfe furfir
 
 ENTRYPOINT ["python3", "/lib/main.py"]

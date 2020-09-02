@@ -15,10 +15,12 @@ app = typer.Typer()
 @app.callback()
 def callback():
     """
-    Humble GLB(web) -> GLB(basis) CLI
+    glb(web images) -> glb(basis images)
 
     A CLI to convert gltf/glb assets with png/jpg textures into glb
     assets with embedded basis/ktx2 textures.
+
+    Made with typer -> [check it](https://github.com/tiangolo/typer)
 
     """
 def compress_images(
@@ -95,6 +97,9 @@ def expand_glb(
     input_file: Path = typer.Argument(...,metavar="FILE"),
     verbose: int = typer.Option(0, "--verbose", "-v", count=True),
 ):
+    """
+    Expand a glb
+    """
     if not input_file.exists():
         typer.secho("input file doesn't exist",fg=typer.colors.RED)
         raise typer.Abort()
@@ -157,6 +162,9 @@ def convert(
     verbose: int = typer.Option(0, "--verbose", "-v", count=True),
     basisu_flags: List[str] = typer.Option(None, "--basisu-flags", "-bf"),
 ):
+    """
+    Convert a glb/gltf (web images) -> glb(basis images)
+    """
     for input_file in input_files:
         if not input_file.exists():
             typer.secho(f"input file {input_file} doesn't exist",fg=typer.colors.RED)
