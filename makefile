@@ -13,30 +13,36 @@ docker-test:
 			/samples/Avocado/avo_binary.glb \
 		-bf "-y_flip" \
 		--tag basisutest
-	
-docker-test-dev:
-	docker run -t \
-		-v $$(pwd)/samples:/samples \
-		-v $$(pwd)/lib/main.py:/lib/main.py \
-		--entrypoint "python3"\
-		beamm/gltf-helper gltf_helper/main.py convert \
-			/samples/Avocado/avo.gltf/asset.gltf \
-			/samples/Avocado/avo_binary.glb \
-		-bf "-y_flip" \
-		--tag basisutest \
-		-v
 
 docker-help:
 	docker run -t \
 		-v $$(pwd)/samples:/samples \
 		gltf-helper --help
 
+docker-test-dev:
+	docker run -t \
+		-v $$(pwd)/samples:/samples \
+		-v $$(pwd)/gltf_helper/main.py:/gltf_helper/main.py \
+		--entrypoint "python3"\
+		beamm/gltf-helper gltf_helper/main.py convert \
+			/samples/Avocado/avo.gltf/asset.gltf \
+			/samples/Avocado/avo_binary.glb \
+		--tag basisutest \
+		-vv
+
+docker-test-convert-help:
+	docker run -t \
+		-v $$(pwd)/samples:/samples \
+		-v $$(pwd)/gltf_helper/main.py:/gltf_helper/main.py \
+		--entrypoint "python3"\
+		beamm/gltf-helper gltf_helper/main.py convert\
+			--help
+
 # CLI
 
 cli-test:
 	gltf-helper convert \
-		samples/Avocado/avo.gltf/asset.gltf \
-		samples/Avocado/avo_binary.glb \
+		samples/Bug/asset.glb \
 	-bf "-y_flip" \
 	--tag basisutest
 

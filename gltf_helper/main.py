@@ -15,7 +15,7 @@ app = typer.Typer()
 @app.callback()
 def callback():
     """
-    glb(web images) -> glb(basis images)
+    glb/gltf(web images) -> glb(basis images)
 
     A CLI to convert gltf/glb assets with png/jpg textures into glb
     assets with embedded basis/ktx2 textures.
@@ -32,13 +32,17 @@ def compress_images(
 ):
     linear_indices = list()
     for material in materials:
-        linear_indices.append(material["normalTexture"]["index"])
-        linear_indices.append(material["pbrMetallicRoughness"]["metallicRoughnessTexture"]["index"])
+        if material.get("normalTexture")!=None:
+            linear_indices.append(material["normalTexture"]["index"])
+        if material["pbrMetallicRoughness"].get("metallicRoughnessTexture")!=None:
+            linear_indices.append(material["pbrMetallicRoughness"]["metallicRoughnessTexture"]["index"])
 
     index_counter = 0
     with typer.progressbar(images,label="Compressing") as images:
         for image in images:
-            if image["mimeType"] not in ["image/png","image/jpg"]:
+            mimeType = image["mimeType"]
+            if mimeType not in ["image/png","image/jpg","image/jpeg"]:
+                typer.secho(f"mime-type {mimeType} not supported",fg=typer.colors.RED)
                 continue
             compress_command = [
                 "basisu", 
@@ -95,11 +99,13 @@ def gltf_pipeline_command(
 @app.command()
 def expand_glb(
     input_file: Path = typer.Argument(...,metavar="FILE"),
+    gltf_pipeline_flags: List[str] = typer.Option(["--separate"], "--gltf-pipeline-flag", "-gf"),
     verbose: int = typer.Option(0, "--verbose", "-v", count=True),
 ):
     """
     Expand a glb
     """
+
     if not input_file.exists():
         typer.secho("input file doesn't exist",fg=typer.colors.RED)
         raise typer.Abort()
@@ -114,7 +120,7 @@ def expand_glb(
         gltf_pipeline_command(
             input_file,
             new_gltf_file_path,
-            ["--separateTextures"],
+            gltf_pipeline_flags,
             verbose
         )
     else:
@@ -160,10 +166,11 @@ def convert(
     tag: str = typer.Option("basisu",metavar="TAG",show_default=True),
     keep_temp_gltf: bool = typer.Option(False, "--keep-temp-gltf"),
     verbose: int = typer.Option(0, "--verbose", "-v", count=True),
-    basisu_flags: List[str] = typer.Option(None, "--basisu-flags", "-bf"),
+    basisu_flags: List[str] = typer.Option(["-y_flip"], "--basisu-flag", "-bf"),
+    gltf_pipeline_flags: List[str] = typer.Option(["--separate"], "--gltf-pipeline-flag", "-gf"),
 ):
     """
-    Convert a glb/gltf (web images) -> glb(basis images)
+    Convert a glb/gltf(web images) -> glb(basis images)
     """
     for input_file in input_files:
         if not input_file.exists():
@@ -174,6 +181,9 @@ def convert(
         start_time = datetime.datetime.now()
 
         suffix = input_file.suffix
+
+        if len(gltf_pipeline_flags) == 0:
+            gltf_pipeline_flags = ["--separateTextures"]
 
         if suffix == ".glb":
             gltf_folder = input_file.with_name(uuid.uuid4().hex[:7]+".gltf")
@@ -186,7 +196,7 @@ def convert(
             gltf_pipeline_command(
                 input_file,
                 new_gltf_file_path,
-                ["--separateTextures"],
+                gltf_pipeline_flags,
                 verbose
             )
 

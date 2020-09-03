@@ -12,6 +12,8 @@ For converting gltf/glb files with embedded jpgs/pngs to glb files with embedded
 - [ ] glb (ktx2 images) -> glb (web images)
 - [x] multiple files
 - [x] custom basisu compression flags
+- [x] custom gltf-pipeline flags
+
 
 ## `Use cases`
 
@@ -54,9 +56,9 @@ make cli-test
 ```
 gltf-helper --help
 
-Usage: gltf-helper [OPTIONS] COMMAND [ARGS]...
+Usage: main.py [OPTIONS] COMMAND [ARGS]...
 
-  glb(web images) -> glb(basis images)
+  glb/gltf(web images) -> glb(basis images)
 
   A CLI to convert gltf/glb assets with png/jpg textures into glb assets
   with embedded basis/ktx2 textures.
@@ -71,7 +73,7 @@ Options:
   --help                Show this message and exit.
 
 Commands:
-  convert     Convert a glb/gltf (web images) -> glb(basis images)
+  convert     Convert a glb/gltf(web images) -> glb(basis images)
   expand-glb  Expand a glb
 ```
 CLI readme ->  [check it](CLI_README.md)

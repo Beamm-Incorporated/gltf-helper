@@ -1,6 +1,6 @@
 # `gltf-helper`
 
-glb(web images) -> glb(basis images)
+glb/gltf(web images) -> glb(basis images)
 
 A CLI to convert gltf/glb assets with png/jpg textures into glb
 assets with embedded basis/ktx2 textures.
@@ -21,12 +21,12 @@ $ gltf-helper [OPTIONS] COMMAND [ARGS]...
 
 **Commands**:
 
-* `convert`: Convert a glb/gltf (web images) -> glb(basis...
+* `convert`: Convert a glb/gltf(web images) -> glb(basis...
 * `expand-glb`: Expand a glb
 
 ## `gltf-helper convert`
 
-Convert a glb/gltf (web images) -> glb(basis images)
+Convert a glb/gltf(web images) -> glb(basis images)
 
 **Usage**:
 
@@ -39,7 +39,8 @@ $ gltf-helper convert [OPTIONS] INPUT
 * `--tag TAG`: [default: basisu]
 * `--keep-temp-gltf`
 * `-v, --verbose`
-* `-bf, --basisu-flags TEXT`
+* `-bf, --basisu-flag TEXT`
+* `-gf, --gltf-pipeline-flag TEXT`
 * `--help`: Show this message and exit.
 
 ## `gltf-helper expand-glb`
@@ -54,5 +55,6 @@ $ gltf-helper expand-glb [OPTIONS] FILE
 
 **Options**:
 
+* `-gf, --gltf-pipeline-flag TEXT`
 * `-v, --verbose`
 * `--help`: Show this message and exit.
