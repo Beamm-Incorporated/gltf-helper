@@ -25,11 +25,7 @@ COPY --from=builder /basis_universal/bin/basisu /usr/bin
 
 COPY gltf_helper /gltf_helper
 
-RUN pip3 install --no-cache-dir poetry \
+RUN pip3 install --no-cache-dir gltf-helper \
     && rm -rf /root/.cache
 
-COPY pyproject.toml /pyproject.toml
-
-RUN poetry config http-basic.mypypi hekfe furfir
-
-ENTRYPOINT ["python3", "/lib/main.py"]
+ENTRYPOINT ["gltf-helper"]

@@ -5,7 +5,7 @@ SHELL := /bin/bash
 build:
 	docker build . -t gltf-helper
 
-test:
+docker-test:
 	docker run -t \
 		-v $$(pwd)/samples:/samples \
 		gltf-helper convert \
@@ -14,21 +14,34 @@ test:
 		-bf "-y_flip" \
 		--tag basisutest
 	
-test-dev:
+docker-test-dev:
 	docker run -t \
 		-v $$(pwd)/samples:/samples \
 		-v $$(pwd)/lib/main.py:/lib/main.py \
-		gltf-helper convert \
+		--entrypoint "python3"\
+		gltf-helper gltf_helper/main.py convert \
 			/samples/Avocado/avo.gltf/asset.gltf \
 			/samples/Avocado/avo_binary.glb \
 		-bf "-y_flip" \
 		--tag basisutest \
 		-v
 
-help:
+docker-help:
 	docker run -t \
 		-v $$(pwd)/samples:/samples \
 		gltf-helper --help
+
+# CLI
+
+cli-test:
+	gltf-helper convert \
+		samples/Avocado/avo.gltf/asset.gltf \
+		samples/Avocado/avo_binary.glb \
+	-bf "-y_flip" \
+	--tag basisutest
+
+cli-help:
+	gltf-helper --help
 
 # Poetry
 
