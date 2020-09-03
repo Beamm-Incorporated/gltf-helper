@@ -2,13 +2,10 @@
 
 ```glb(web images) -> glb(basis images)```
 
-
-##
-
 Allows converting gltf/glb files with embedded jpgs/pngs to glb files with embedded basisu images.
 
-## Features
-*System*
+## `Features`
+
 - [x] glb (web images) -> glb (basisu images)
 - [ ] glb (web images) -> glb (ktx2 images)
 - [ ] glb (basisu images) -> glb (web images)
@@ -16,7 +13,7 @@ Allows converting gltf/glb files with embedded jpgs/pngs to glb files with embed
 - [x] multiple files
 - [x] custom basisu compression flags
 
-## Use cases
+## `Use cases`
 
 Unity gltf pipeline:
 - [GLTFUtility](https://github.com/Siccity/GLTFUtility) 
@@ -24,35 +21,21 @@ Unity gltf pipeline:
 
 See [sample project](https://github.com/daverin/glTF-universal-tex-unity-demo) ✨
 
-## Usage 
-
-### **Blue Pill Usage**
-#
-
+## `Blue Pill Usage`
 
 #### Test
 ```
-docker run -t \
-    -v $(pwd)/samples:/samples \
-    beamm/gltf-helper convert \
-        /samples/Avocado/avo.gltf/asset.gltf \
-        /samples/Avocado/avo_binary.glb \
-    -bf "-y_flip" \
-    --tag basisutest
+make docker-test
 ```
 
 #### Help 
 
 ```
-docker run -t \
-    -v $$(pwd)/samples:/samples \
-    beamm/gltf-helper --help
+make docker-help
 ```
+makefile ->  [check it](https://github.com/Beamm-Incorporated/gltf-helper/blob/master/makefile)
 
-TIP: Checkout `makefile` for other useful commands
-
-### **Red Pill Usage**
-#
+## `Red Pill Usage`
 
  1) build basisu -> [check it](https://github.com/BinomialLLC/basis_universal#command-line-compression-tool)
 
@@ -61,4 +44,15 @@ TIP: Checkout `makefile` for other useful commands
  ```
  pip install --user gltf-helper
  ```
-3) CLI readme ->  [check it](CLI_README.md)
+
+#### Test
+```
+make cli-test
+```
+
+#### Help 
+
+```
+make cli-help
+```
+CLI readme ->  [check it](CLI_README.md)
