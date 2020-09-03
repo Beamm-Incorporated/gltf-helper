@@ -23,6 +23,10 @@ See [sample project](https://github.com/daverin/glTF-universal-tex-unity-demo) â
 
 ## `Blue Pill Usage`
 
+#### Prerequisites
+
+1) docker
+
 #### Test
 ```
 make docker-test
@@ -36,6 +40,8 @@ make docker-help
 makefile ->  [check it](https://github.com/Beamm-Incorporated/gltf-helper/blob/master/makefile)
 
 ## `Red Pill Usage`
+
+#### Prerequisites
 
  1) build basisu -> [check it](https://github.com/BinomialLLC/basis_universal#command-line-compression-tool)
 

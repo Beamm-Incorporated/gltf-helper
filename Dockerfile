@@ -14,10 +14,13 @@ RUN apt-get update \
     && apt-get install -y \
     python3.8 \
     python3-pip \
-    curl
+    curl \
+    && rm -rf /var/lib/apt/lists/*
 
 RUN curl -sL https://deb.nodesource.com/setup_10.x | bash \
-    && apt-get install -y nodejs
+    && apt-get update \
+    && apt-get install -y nodejs \
+    && rm -rf /var/lib/apt/lists/*
     
 RUN npm install -g gltf-pipeline 
 
