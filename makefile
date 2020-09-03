@@ -3,12 +3,12 @@ SHELL := /bin/bash
 # Docker
 
 build:
-	docker build . -t gltf-helper
+	docker build . -t beamm/gltf-helper
 
 docker-test:
 	docker run -t \
 		-v $$(pwd)/samples:/samples \
-		gltf-helper convert \
+		beamm/gltf-helper convert \
 			/samples/Avocado/avo.gltf/asset.gltf \
 			/samples/Avocado/avo_binary.glb \
 		-bf "-y_flip" \
@@ -19,7 +19,7 @@ docker-test-dev:
 		-v $$(pwd)/samples:/samples \
 		-v $$(pwd)/lib/main.py:/lib/main.py \
 		--entrypoint "python3"\
-		gltf-helper gltf_helper/main.py convert \
+		beamm/gltf-helper gltf_helper/main.py convert \
 			/samples/Avocado/avo.gltf/asset.gltf \
 			/samples/Avocado/avo_binary.glb \
 		-bf "-y_flip" \
