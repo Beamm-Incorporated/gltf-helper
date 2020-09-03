@@ -32,11 +32,6 @@ See [sample project](https://github.com/daverin/glTF-universal-tex-unity-demo) â
 make docker-test
 ```
 
-#### Help 
-
-```
-make docker-help
-```
 makefile ->  [check it](https://github.com/Beamm-Incorporated/gltf-helper/blob/master/makefile)
 
 ## `Red Pill Usage`
@@ -56,10 +51,27 @@ makefile ->  [check it](https://github.com/Beamm-Incorporated/gltf-helper/blob/m
 ```
 make cli-test
 ```
-
-#### Help 
-
 ```
-make cli-help
+gltf-helper --help
+
+Usage: gltf-helper [OPTIONS] COMMAND [ARGS]...
+
+  glb(web images) -> glb(basis images)
+
+  A CLI to convert gltf/glb assets with png/jpg textures into glb assets
+  with embedded basis/ktx2 textures.
+
+  Made with typer -> [check it](https://github.com/tiangolo/typer)
+
+Options:
+  --install-completion  Install completion for the current shell.
+  --show-completion     Show completion for the current shell, to copy it or
+                        customize the installation.
+
+  --help                Show this message and exit.
+
+Commands:
+  convert     Convert a glb/gltf (web images) -> glb(basis images)
+  expand-glb  Expand a glb
 ```
 CLI readme ->  [check it](CLI_README.md)
