@@ -2,7 +2,7 @@
 
 ```glb(web images) -> glb(basis images)```
 
-Allows converting gltf/glb files with embedded jpgs/pngs to glb files with embedded basisu images.
+For converting gltf/glb files with embedded jpgs/pngs to glb files with embedded basisu images.
 
 ## `Features`
 
@@ -41,6 +41,7 @@ makefile ->  [check it](https://github.com/Beamm-Incorporated/gltf-helper/blob/m
 
  2) install gltf-pipeline -> [check it](https://github.com/CesiumGS/gltf-pipeline#getting-started)
 
+ 3) Install PyPI package
  ```
  pip install --user gltf-helper
  ```

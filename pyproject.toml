@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "gltf-helper"
-version = "0.2.3"
+version = "0.2.4"
 description = ""
 authors = ["Daverin Nadesan <daverin@beamm.co>"]
 readme = "README.md"
