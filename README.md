@@ -4,15 +4,24 @@
 
 For converting gltf/glb files with embedded jpgs/pngs to glb files with embedded basisu images.
 
-## `Features`
+`What is gltf?`
 
+[glTF](https://github.com/KhronosGroup/glTF) is a file format for 3D scenes and models using the JSON standard. It is an API-neutral runtime asset delivery format developed by the Khronos Group 3D Formats Working Group.
+
+`What is basisu?`
+
+[Basis Universal](https://github.com/BinomialLLC/basis_universal) is a "supercompressed" GPU texture compression system that outputs a highly compressed intermediate file format (.basis) that can be quickly transcoded to a very wide variety of GPU compressed and uncompressed pixel formats.
+
+## `Features`
+- [x] gltf (web images) -> glb (basisu images)
 - [x] glb (web images) -> glb (basisu images)
 - [ ] glb (web images) -> glb (ktx2 images)
 - [ ] glb (basisu images) -> glb (web images)
 - [ ] glb (ktx2 images) -> glb (web images)
 - [x] multiple files
 - [x] custom basisu compression flags
-- [x] custom gltf-pipeline flags
+- [x] custom gltf-pipeline flags (support for [draco](https://github.com/google/draco))
+
 
 
 ## `Use cases`
