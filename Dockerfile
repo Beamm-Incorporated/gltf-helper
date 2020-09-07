@@ -1,12 +1,34 @@
-FROM rikorose/gcc-cmake AS builder
+FROM ubuntu:focal as builder
 
 WORKDIR /
 
-RUN git clone https://github.com/BinomialLLC/basis_universal.git
+ENV TZ=Africa/Cairo
 
-RUN cd basis_universal \
-    && cmake CMakeLists.txt \
-    && make
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
+RUN apt-get update \
+    && apt-get install -y \
+    build-essential \
+    cmake \
+    libzstd-dev \  
+    ninja-build \
+    doxygen \
+    libsdl2-dev \ 
+    libgl1-mesa-glx \ 
+    libgl1-mesa-dev \
+    libvulkan1 \
+    libvulkan-dev \ 
+    libassimp-dev \
+    git \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN git clone https://github.com/KhronosGroup/KTX-Software.git
+
+RUN cd KTX-Software \
+    && cmake . -B build \
+    && cmake --build build \
+    && cd build \
+    && make install
 
 FROM ubuntu:focal
 
@@ -24,7 +46,9 @@ RUN curl -sL https://deb.nodesource.com/setup_10.x | bash \
     
 RUN npm install -g gltf-pipeline 
 
-COPY --from=builder /basis_universal/bin/basisu /usr/bin
+COPY --from=builder /usr/local /usr/local/
+
+RUN cp /usr/local/lib/lib* /lib/
 
 COPY gltf_helper /gltf_helper
 
